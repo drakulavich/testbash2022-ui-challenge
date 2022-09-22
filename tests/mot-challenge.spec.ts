@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
 
-test('test', async ({ page }) => {
+// https://club.ministryoftesting.com/t/take-the-test-bash-2022-ui-challenge-closing-on-the-25th-of-september-2022/61210
+test('read the message in the admin portal', async ({ page }) => {
   const contactNumber = Math.round(new Date().getTime() / 1000);
 
   await page.goto('https://automationintesting.online/');
