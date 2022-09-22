@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 // https://club.ministryoftesting.com/t/take-the-test-bash-2022-ui-challenge-closing-on-the-25th-of-september-2022/61210
 test('read the message in the admin portal', async ({ page }) => {
-  const contactNumber = Math.round(new Date().getTime() / 1000);
+  const randomNumber = Math.round(Math.random() * 1000000);
 
   await page.goto('https://automationintesting.online/');
 
@@ -14,7 +14,7 @@ test('read the message in the admin portal', async ({ page }) => {
 
   await page.locator('[data-testid="ContactPhone"]').fill('971581112233');
 
-  await page.locator('[data-testid="ContactSubject"]').fill(`Booking request from Winterfell #${contactNumber}`);
+  await page.locator('[data-testid="ContactSubject"]').fill(`Booking request from Winterfell #${randomNumber}`);
 
   await page.locator('[data-testid="ContactDescription"]').fill('Winter is coming! Please accept my request ASAP!\n\nRegards,\nJS');
 
@@ -30,7 +30,7 @@ test('read the message in the admin portal', async ({ page }) => {
 
   await page.goto('https://automationintesting.online/#/admin/messages');
 
-  await page.locator(`text=${contactNumber}`).click();
+  await page.locator(`text=${randomNumber}`).click();
 
   await expect(page.locator('text=johnny@snow.me')).toBeVisible();
 
@@ -38,7 +38,7 @@ test('read the message in the admin portal', async ({ page }) => {
 
   // Remove the message
   const row = page.locator('.row');
-  await row.locator(':scope', { hasText: contactNumber.toString() }).locator('.fa-remove').click();
+  await row.locator(':scope', { hasText: randomNumber.toString() }).locator('.fa-remove').click();
 
   // Click text=Logout
   await page.locator('text=Logout').click();
