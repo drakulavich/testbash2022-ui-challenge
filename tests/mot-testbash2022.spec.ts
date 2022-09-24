@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 const contact = {
-    name: 'John Show',
+    name: 'John Dow',
     email: 'johnny@me.com',
     phone: '971581112233',
     subject: 'Please accept my booking',
@@ -9,10 +9,9 @@ const contact = {
 };
 
 test('test', async ({ page }) => {
-
   const randomNumber = Math.floor(Math.random() * 1000000);
 
-  await page.goto('https://automationintesting.online/');
+  await page.goto('/');
 
   await page.locator('text=Let me hack!').click();
 
@@ -30,18 +29,18 @@ test('test', async ({ page }) => {
 
   await page.locator('text=Submit').click();
 
-  await page.goto('https://automationintesting.online/#/admin');
+  await page.goto('/#/admin');
 
   await page.locator('[data-testid="username"]').fill('admin');
   await page.locator('[data-testid="password"]').fill('password');
   await page.locator('[data-testid="submit"]').click();
 
-  await page.goto('https://automationintesting.online/#/admin/messages');
+  await page.goto('/#/admin/messages');
 
   await page.locator(`text=${randomNumber}`).click();
 
   for (const contactValue of Object.values(contact)) {
-    expect(await page.locator(`text=${contactValue}`)).toBeVisible();
+    expect(await page.locator(`text=${contactValue}`).last()).toBeVisible();
   };
 
   await page.locator('text=Close').click();
@@ -50,5 +49,5 @@ test('test', async ({ page }) => {
   await row.locator(':scope', { hasText: randomNumber.toString() }).locator('.fa-remove').click();
 
   await page.locator('text=Logout').click();
-  await expect(page).toHaveURL('https://automationintesting.online/#/admin');
+  await expect(page).toHaveURL('/#/admin');
 });
