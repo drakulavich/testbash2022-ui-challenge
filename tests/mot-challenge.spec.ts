@@ -12,7 +12,7 @@ const contact = {
 test('read the message in the admin portal', async ({ page }) => {
   const randomNumber = Math.round(Math.random() * 1000000);
 
-  await page.goto('https://automationintesting.online/');
+  await page.goto('/');
 
   await page.locator('button:has-text("let me hack")').click();
 
@@ -28,13 +28,13 @@ test('read the message in the admin portal', async ({ page }) => {
 
   await page.locator('text=Submit').click();
 
-  await page.goto('https://automationintesting.online/#/admin');
+  await page.goto('/#/admin');
 
   await page.locator('[data-testid="username"]').fill('admin');
   await page.locator('[data-testid="password"]').fill('password');
   await page.locator('[data-testid="submit"]').click();
 
-  await page.goto('https://automationintesting.online/#/admin/messages');
+  await page.goto('/#/admin/messages');
 
   await page.locator(`text=${randomNumber}`).click();
   for (const contactValue of Object.values(contact)) {

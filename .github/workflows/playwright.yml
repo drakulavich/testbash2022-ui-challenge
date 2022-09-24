@@ -20,6 +20,8 @@ jobs:
       run: make install-playwright
     - name: Run Playwright tests
       run: make test
+      env:
+        BASE_URL: https://automationintesting.online
     - name: Upload test results
       if: always()
       uses: actions/upload-artifact@v3
