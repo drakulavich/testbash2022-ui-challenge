@@ -1,5 +1,13 @@
 import { test, expect } from '@playwright/test';
 
+const contact = {
+    name: 'John Show',
+    email: 'johnny@me.com',
+    phone: '971581112233',
+    subject: 'Please accept my booking',
+    description: 'Winter is coming! Please book a room for two nights ASAP!\n\nRegards,\nJS',
+};
+
 test('test', async ({ page }) => {
 
   const randomNumber = Math.floor(Math.random() * 1000000);
@@ -10,15 +18,15 @@ test('test', async ({ page }) => {
 
   await page.locator('[data-testid="ContactName"]').click();
 
-  await page.locator('[data-testid="ContactName"]').fill('John Show');
+  await page.locator('[data-testid="ContactName"]').fill(contact.name);
 
-  await page.locator('[data-testid="ContactEmail"]').fill('johnny@me.com');
+  await page.locator('[data-testid="ContactEmail"]').fill(contact.email);
 
-  await page.locator('[data-testid="ContactPhone"]').fill('971581112233');
+  await page.locator('[data-testid="ContactPhone"]').fill(contact.phone);
 
-  await page.locator('[data-testid="ContactSubject"]').fill(`Please accept my booking #${randomNumber}`);
+  await page.locator('[data-testid="ContactSubject"]').fill(`${contact.subject} #${randomNumber}`);
 
-  await page.locator('[data-testid="ContactDescription"]').fill('Winter is coming! Please book a room for two nights ASAP!\n\nRegards,\nJS');
+  await page.locator('[data-testid="ContactDescription"]').fill(contact.description);
 
   await page.locator('text=Submit').click();
 
@@ -30,11 +38,11 @@ test('test', async ({ page }) => {
 
   await page.goto('https://automationintesting.online/#/admin/messages');
 
-  await page.locator('text=Please accept my booking').last().click();
+  await page.locator(`text=${randomNumber}`).click();
 
-  await expect(page.locator('text=Please accept my booking').last()).toBeVisible();
-  await expect(page.locator('text=John Show').last()).toBeVisible();
-  await expect(page.locator('text=johnny@me.com').last()).toBeVisible();
+  for (const contactValue of Object.values(contact)) {
+    expect(await page.locator(`text=${contactValue}`)).toBeVisible();
+  };
 
   await page.locator('text=Close').click();
 
