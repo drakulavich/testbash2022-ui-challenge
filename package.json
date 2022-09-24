@@ -1,0 +1,21 @@
+{
+  "name": "playwright-mot-challenge",
+  "version": "1.0.0",
+  "description": "Playwright implementation for the task",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/drakulavich/testbash2022-ui-challenge.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/drakulavich/testbash2022-ui-challenge/issues"
+  },
+  "homepage": "https://github.com/drakulavich/testbash2022-ui-challenge#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.26.0"
+  }
+}
