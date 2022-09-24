@@ -40,9 +40,8 @@ test('test', async ({ page }) => {
   await page.locator(`text=${randomNumber}`).click();
 
   for (const contactValue of Object.values(contact)) {
-    expect(await page.locator(`text=${contactValue}`).last()).toBeVisible();
+    await expect(page.locator(`.message-modal >> text=${contactValue}`)).toBeVisible();
   };
-
   await page.locator('text=Close').click();
 
   const row = page.locator('.row');
