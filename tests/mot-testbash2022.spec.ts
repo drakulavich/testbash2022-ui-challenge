@@ -2,6 +2,8 @@ import { test, expect } from '@playwright/test';
 
 test('test', async ({ page }) => {
 
+  const randomNumber = Math.floor(Math.random() * 1000000);
+
   await page.goto('https://automationintesting.online/');
 
   await page.locator('text=Let me hack!').click();
@@ -14,7 +16,7 @@ test('test', async ({ page }) => {
 
   await page.locator('[data-testid="ContactPhone"]').fill('971581112233');
 
-  await page.locator('[data-testid="ContactSubject"]').fill('Please accept my booking');
+  await page.locator('[data-testid="ContactSubject"]').fill(`Please accept my booking #${randomNumber}`);
 
   await page.locator('[data-testid="ContactDescription"]').fill('Winter is coming! Please book a room for two nights ASAP!\n\nRegards,\nJS');
 
@@ -35,6 +37,9 @@ test('test', async ({ page }) => {
   await expect(page.locator('text=johnny@me.com').last()).toBeVisible();
 
   await page.locator('text=Close').click();
+
+  const row = page.locator('.row');
+  await row.locator(':scope', { hasText: randomNumber.toString() }).locator('.fa-remove').click();
 
   await page.locator('text=Logout').click();
   await expect(page).toHaveURL('https://automationintesting.online/#/admin');
